@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<antlib>
+    <!-- Tasks -->
+    <taskdef name="strings"
+             classname="net.kernelits.antlibtasks.ant.tasks.StringsTask" />
+    <taskdef name="deploy"
+             classname="net.kernelits.antlibtasks.ant.tasks.DeployTask" />
+    <taskdef name="svn"
+             classname="net.kernelits.antlibtasks.ant.tasks.SvnTask" />
+    <taskdef name="normalizesb"
+             classname="net.kernelits.antlibtasks.ant.tasks.NormalizeSBTask" />
+    <taskdef name="get"
+             classname="net.kernelits.antlibtasks.ant.tasks.GetTask" />
+    <taskdef name="file"
+             classname="net.kernelits.antlibtasks.ant.tasks.FileTask" />
+    <taskdef name="sbget"
+             classname="net.kernelits.antlibtasks.ant.tasks.SBGetTask" />
+
+    <!-- Conditions -->
+    <typedef name="startWith"
+             classname="net.kernelits.antlibtasks.ant.conditions.StartWith" />
+</antlib>
