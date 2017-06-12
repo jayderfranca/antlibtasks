@@ -1,12 +1,13 @@
 package net.kernelits.antlibtasks.ant.tasks;
 
+import net.kernelits.antlibtasks.ant.commands.Command;
+import net.kernelits.antlibtasks.utils.AntLog;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import net.kernelits.antlibtasks.ant.commands.Command;
-import net.kernelits.antlibtasks.utils.AntLog;
 
 /**
  * Classe abstrata de tasks
@@ -61,7 +62,7 @@ public abstract class Task extends org.apache.tools.ant.Task {
     public void setProperty(String name, String value) {
 
         // caso nao foi criado o projeto atribui no sistema
-        if (getProject() == null || ! (getProject() instanceof Project))
+        if (getProject() == null || !(getProject() instanceof Project))
             System.getProperties().put(name, value);
         else
             getProject().setProperty(name, value);
@@ -74,10 +75,10 @@ public abstract class Task extends org.apache.tools.ant.Task {
     public String getProperty(String name) {
 
         // variaveis
-        String value;
+        String value = "";
 
         // caso nao foi criado o projeto obtem no sistema
-        if (getProject() == null || ! (getProject() instanceof Project))
+        if (getProject() == null || !(getProject() instanceof Project))
             value = System.getProperties().getProperty(name);
         else
             value = getProject().getProperty(name);

@@ -1,9 +1,9 @@
 package net.kernelits.antlibtasks.ant.commands;
 
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.ProjectComponent;
 import net.kernelits.antlibtasks.ant.tasks.Task;
 import net.kernelits.antlibtasks.utils.AntLog;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.ProjectComponent;
 
 /**
  * Classe abstrata de comandos de tasks
@@ -22,6 +22,7 @@ public abstract class Command extends ProjectComponent {
     public void setTask(Task value) {
         taskOwner = value;
     }
+
     public Task getTask() {
         return taskOwner;
     }
@@ -38,9 +39,10 @@ public abstract class Command extends ProjectComponent {
     }
 
     // lanca uma exception padronizada
-    private void buildException(String message, Throwable cause) {
+    public void buildException(String message, Throwable cause) {
         getTask().buildException("<" + getClassName() + "> " + message, cause);
     }
+
     public void buildException(String message) {
         buildException(message, null);
     }

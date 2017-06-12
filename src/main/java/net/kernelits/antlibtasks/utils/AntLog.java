@@ -1,9 +1,9 @@
 package net.kernelits.antlibtasks.utils;
 
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.Echo;
 import net.kernelits.antlibtasks.ant.commands.Command;
 import net.kernelits.antlibtasks.ant.tasks.Task;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Echo;
 
 /**
  * Classe de suporte para Log
@@ -40,8 +40,7 @@ public class AntLog {
 
         // no caso de existir o comando,
         // busca o nome do comando
-        if (command != null)
-        {
+        if (command != null) {
             // obtem o ultimo nome da classe
             String[] fullname = command.getClass().getName().split("\\.");
             classname = fullname[fullname.length - 1];
@@ -75,7 +74,7 @@ public class AntLog {
             if (empty == null) {
 
                 // cria a task echo com mensagem vazia
-                empty = (Echo)mytask.getProject().createTask("echo");
+                empty = (Echo) mytask.getProject().createTask("echo");
                 empty.setTaskName(mytask.getTaskName());
                 empty.addText("");
             }
