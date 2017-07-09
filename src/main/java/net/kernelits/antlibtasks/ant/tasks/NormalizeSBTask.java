@@ -55,7 +55,7 @@ public class NormalizeSBTask extends Task {
         try {
 
             // exclui o diretorio de saida
-            FileUtils.dirDelete(dirOutput, true);
+            FileUtils.delete(dirOutput);
 
             // recria o diretorio
             dirOutput.mkdirs();
@@ -64,7 +64,7 @@ public class NormalizeSBTask extends Task {
             // no diretorio de pesquisa, procura
             // arquivos do tipo jar, zip, rar, xsd e wsdl
             // para normalizacao
-            File[] files = FileUtils.listFiles(dirSearch, true, new FileFilter() {
+            File[] files = FileUtils.list(dirSearch, new FileFilter() {
                 public boolean accept(File pathname) {
                     return pathname.getName().endsWith(".jar") ||
                             pathname.getName().endsWith(".zip") ||
@@ -94,7 +94,7 @@ public class NormalizeSBTask extends Task {
 
                 // exclui arquivos processados
                 if (excProcessedFiles)
-                    FileUtils.dirDelete(file, true);
+                    FileUtils.delete(file);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -120,7 +120,7 @@ public class NormalizeSBTask extends Task {
         FileUtils.unzip(zip, dest, true);
 
         // list os arquivos extraidos
-        File[] files = FileUtils.listFiles(dest, true, new FileFilter() {
+        File[] files = FileUtils.list(dest, new FileFilter() {
             public boolean accept(File pathname) {
                 return pathname.getName().endsWith(".jar") ||
                         pathname.getName().endsWith(".zip") ||
@@ -150,7 +150,7 @@ public class NormalizeSBTask extends Task {
         }
 
         if (excProcessedFiles)
-            FileUtils.dirDelete(dest, true);
+            FileUtils.delete(dest);
     }
 
     private void processXmlFile(File xml, File dest) throws Exception {

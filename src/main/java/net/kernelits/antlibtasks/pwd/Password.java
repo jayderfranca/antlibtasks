@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils.pwd;
+package net.kernelits.antlibtasks.pwd;
 
 import org.apache.commons.codec.binary.Base64;
 

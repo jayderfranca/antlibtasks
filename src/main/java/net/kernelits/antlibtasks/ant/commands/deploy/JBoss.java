@@ -2,12 +2,12 @@ package net.kernelits.antlibtasks.ant.commands.deploy;
 
 import net.kernelits.antlibtasks.ant.commands.Command;
 import net.kernelits.antlibtasks.ant.tasks.DeployTask;
-import net.kernelits.antlibtasks.utils.Constants;
-import net.kernelits.antlibtasks.utils.deploy.JBDeploy;
-import net.kernelits.antlibtasks.utils.os.IOperationalSystem;
-import net.kernelits.antlibtasks.utils.os.OSConnectParameters;
-import net.kernelits.antlibtasks.utils.os.impl.OSLinux;
-import net.kernelits.antlibtasks.utils.os.impl.OSWindows;
+import net.kernelits.antlibtasks.Constants;
+import net.kernelits.antlibtasks.deploy.JBDeploy;
+import net.kernelits.antlibtasks.os.IOperationalSystem;
+import net.kernelits.antlibtasks.os.OSConnectParameters;
+import net.kernelits.antlibtasks.os.impl.OSLinux;
+import net.kernelits.antlibtasks.os.impl.OSWindows;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.Reference;

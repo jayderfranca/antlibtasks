@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils.os.impl;
+package net.kernelits.antlibtasks.os.impl;
 
 import jcifs.UniAddress;
 import jcifs.smb.NtlmPasswordAuthentication;
@@ -6,9 +6,9 @@ import jcifs.smb.SmbFile;
 import jcifs.smb.SmbFileOutputStream;
 import jcifs.smb.SmbSession;
 import net.kernelits.antlibtasks.ant.exceptions.NotImplementedException;
-import net.kernelits.antlibtasks.utils.os.IOperationalSystem;
-import net.kernelits.antlibtasks.utils.os.OSConnectParameters;
-import net.kernelits.antlibtasks.utils.pwd.Password;
+import net.kernelits.antlibtasks.os.IOperationalSystem;
+import net.kernelits.antlibtasks.os.OSConnectParameters;
+import net.kernelits.antlibtasks.pwd.Password;
 
 import java.io.File;
 import java.io.FileInputStream;

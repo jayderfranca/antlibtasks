@@ -4,7 +4,7 @@ package net.kernelits.antlibtasks.ant.commands.svn;
 
 import net.kernelits.antlibtasks.ant.commands.Command;
 import net.kernelits.antlibtasks.ant.tasks.SvnTask;
-import net.kernelits.antlibtasks.utils.pwd.Password;
+import net.kernelits.antlibtasks.pwd.Password;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.tigris.subversion.svnclientadapter.*;

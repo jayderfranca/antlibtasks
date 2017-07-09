@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils.os;
+package net.kernelits.antlibtasks.os;
 
 import java.io.File;
 

@@ -1,5 +1,6 @@
 package net.kernelits.antlibtasks.ant.tasks;
 
+import net.kernelits.antlibtasks.Elapsed;
 import net.kernelits.antlibtasks.ant.types.sbget.Reference;
 import net.kernelits.antlibtasks.ant.types.sbget.ReferenceList;
 import net.kernelits.antlibtasks.ant.types.sbget.Remote;
@@ -114,7 +115,7 @@ public class SBGetTask extends Task {
         log.info("Excluindo diretorio " + dirOutput.getAbsolutePath());
 
         // remove todos arquivos do diretorio de saida
-        FileUtils.dirDelete(dirOutput, true);
+        FileUtils.delete(dirOutput);
 
         // recria o diretorio de saida
         dirOutput.mkdirs();
@@ -161,7 +162,7 @@ public class SBGetTask extends Task {
     public void parseRemoteList(File list, List<Remote> remotes) throws Exception {
 
         // realiza a leitura do arquivo para uma lista
-        List<String> lines = FileUtils.readAll(list);
+        List<String> lines = FileUtils.read(list);
 
         // loop de cada linha para processamento
         for (String line : lines) {
@@ -204,7 +205,7 @@ public class SBGetTask extends Task {
     public void parseReferenceList(File list, List<Reference> references) throws Exception {
 
         // realiza a leitura do arquivo para uma lista
-        List<String> lines = FileUtils.readAll(list);
+        List<String> lines = FileUtils.read(list);
 
         // loop de cada linha para processamento
         for (String line : lines) {

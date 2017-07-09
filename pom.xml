@@ -8,6 +8,9 @@
     <artifactId>antlibtasks</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>Ant Library Tasks</name>
+    <description>Biblioteca de tasks utilitárias de Ant</description>
+
     <!-- dependencias deste projeto -->
     <dependencies>
         <dependency>
@@ -62,17 +65,38 @@
             <version>0.9.100</version>
         </dependency>
         <dependency>
-            <groupId>org.tigris.subversion</groupId>
-            <artifactId>svnClientAdapter-sources</artifactId>
-            <version>0.9.100</version>
-            <type>zip</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations-java5</artifactId>
             <version>RELEASE</version>
         </dependency>
     </dependencies>
+
+    <!-- configuracoes do build -->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

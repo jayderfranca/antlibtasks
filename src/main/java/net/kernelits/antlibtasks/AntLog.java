@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils;
+package net.kernelits.antlibtasks;
 
 import net.kernelits.antlibtasks.ant.commands.Command;
 import net.kernelits.antlibtasks.ant.tasks.Task;

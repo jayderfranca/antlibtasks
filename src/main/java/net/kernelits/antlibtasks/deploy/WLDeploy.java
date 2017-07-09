@@ -1,6 +1,6 @@
-package net.kernelits.antlibtasks.utils.deploy;
+package net.kernelits.antlibtasks.deploy;
 
-import net.kernelits.antlibtasks.utils.pwd.Password;
+import net.kernelits.antlibtasks.pwd.Password;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.taskdefs.Java;

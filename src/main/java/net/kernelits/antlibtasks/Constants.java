@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils;
+package net.kernelits.antlibtasks;
 
 /**
  * Classe de constantes do pacote
@@ -9,6 +9,7 @@ public class Constants {
 
     // propriedades de deploy
     public static String SERVICE = "service";
+    public static String NAME = "name";
     public static String MACHINE_NAME = "machine.name";
     public static String OS_TYPE = "os.type";
     public static String OS_DOMAIN = "os.domain";

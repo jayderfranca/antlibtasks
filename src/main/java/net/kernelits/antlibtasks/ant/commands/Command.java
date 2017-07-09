@@ -1,7 +1,7 @@
 package net.kernelits.antlibtasks.ant.commands;
 
 import net.kernelits.antlibtasks.ant.tasks.Task;
-import net.kernelits.antlibtasks.utils.AntLog;
+import net.kernelits.antlibtasks.AntLog;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.ProjectComponent;
 

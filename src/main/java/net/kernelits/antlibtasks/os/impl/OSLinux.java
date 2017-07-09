@@ -1,13 +1,13 @@
-package net.kernelits.antlibtasks.utils.os.impl;
+package net.kernelits.antlibtasks.os.impl;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import net.kernelits.antlibtasks.ant.exceptions.NotImplementedException;
-import net.kernelits.antlibtasks.utils.os.IOperationalSystem;
-import net.kernelits.antlibtasks.utils.os.OSConnectParameters;
-import net.kernelits.antlibtasks.utils.pwd.Password;
+import net.kernelits.antlibtasks.os.IOperationalSystem;
+import net.kernelits.antlibtasks.os.OSConnectParameters;
+import net.kernelits.antlibtasks.pwd.Password;
 
 import java.io.File;
 import java.io.FileNotFoundException;

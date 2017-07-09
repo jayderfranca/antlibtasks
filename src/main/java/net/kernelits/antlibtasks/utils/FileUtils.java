@@ -1,5 +1,8 @@
 package net.kernelits.antlibtasks.utils;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,61 +19,83 @@ import java.util.zip.ZipFile;
 public class FileUtils {
 
     // exclui arquivos e diretorios recursivamente
-    public static boolean dirDelete(File directory, boolean recursive) {
+    @Contract("null -> false")
+    public static boolean delete(File item) {
 
-        // verifica se o diretorio eh nulo
-        if (directory == null)
-            throw new NullPointerException();
+        // verifica se o item eh nulo
+        if (item == null)
+            return false;
 
-        if (recursive) {
-            if (directory.isDirectory()) {
-                File[] files = directory.listFiles();
+        // caso o item seja um diretorio,
+        // remove primeiramente os arquivos e
+        // depois o diretorio
+        if (item.isDirectory()) {
 
-                // validacao de null pointer
-                if (files == null)
-                    files = new File[0];
+            // lista todas as entradas
+            File[] entries = item.listFiles();
 
-                for (File file : files) {
-                    if (!dirDelete(file, true))
-                        return false;
-                }
-            }
+            // validacao de null
+            if (entries == null)
+                entries = new File[0];
+
+            // remocao recursiva
+            for (File entry : entries)
+                if (!delete(entry))
+                    return false;
         }
-        return directory.delete();
+
+        // remove o item em si
+        return item.delete();
     }
 
     // lista arquivos/diretorios recursivamente
-    public static File[] listFiles(File dir, boolean recursive, FileFilter filter) {
+    @NotNull
+    public static File[] list(File dir, FileFilter filter) {
 
         // verifica se o diretorio eh nulo
         if (dir == null)
-            throw new NullPointerException();
+            return new File[0];
 
         // array de retorno da lista de arquivos
         ArrayList<File> list = new ArrayList<File>();
 
-        // lista todos arquivos e subdiretorios
-        File[] files = dir.listFiles();
+        // lista todos os arquivos e subdiretorios
+        File[] files;
 
-        // validacao de null pointer
-        if (files == null)
-            files = new File[0];
+        // em caso de arquivo, nao aciona list
+        if (!dir.isDirectory()) {
+
+            // cria um unico indice
+            files = new File[1];
+
+            // adiciona o proprio arquivo
+            files[0] = dir;
+
+        } else {
+
+            // lista todos arquivos e subdiretorios
+            files = dir.listFiles();
+
+            // validacao de null
+            if (files == null)
+                files = new File[0];
+        }
 
         // loop de cada arquivo
         for (File file : files) {
 
             // verifica se eh um diretorio e vai listar recursivamente
-            if (file.isDirectory() && recursive) {
+            if (file.isDirectory()) {
 
                 // realiza a chamada novamente da funcao
-                File[] sublist = listFiles(file, true, filter);
+                File[] sublist = list(file, filter);
 
                 // verifica se a sublista possui itens
-                if (sublist.length > 0) {
+                if (sublist.length > 0)
 
                     // acrescenta na lista principal
                     list.addAll(Arrays.asList(sublist));
-                }
+
             } else {
 
                 // nao eh um diretorio ou nao eh recursivo
@@ -79,11 +104,11 @@ public class FileUtils {
                 if (filter != null) {
 
                     // verifica se o item eh aceito pelo filter
-                    if (filter.accept(file)) {
+                    if (filter.accept(file))
 
                         // o item eh aceito, adiciona na lista
                         list.add(file);
-                    }
+
                 } else {
 
                     // nao possui filter, adiciona
@@ -96,43 +121,22 @@ public class FileUtils {
         return list.toArray(new File[list.size()]);
     }
 
-    // realiza a copia de um stream para o outro
-    private static void copyStream(InputStream in, OutputStream out) throws IOException {
-
-        if (in == null)
-            throw new IOException("Invalid InputStream");
-
-        if (out == null)
-            throw new IOException("Invalid OutputStream");
-
-        // tamanho do buffer de copia: padrao 4K
-        byte[] buffer = new byte[4 * 1024];
-
-        // bytes copiados
-        int size;
-
-        // loop de copia de bytes
-        while ((size = in.read(buffer)) >= 0)
-            out.write(buffer, 0, size);
-
-        // fecha os streams
-        in.close();
-        out.close();
-    }
-
     // descompacta um arquivo compactado
     public static void unzip(File zip, File dest, boolean replace) throws IOException {
 
         File entry;
 
-        // exclui o destino ou lanca erro
-        if (dest.exists() && replace)
-            dirDelete(dest, true);
-        else if (dest.exists() && !replace)
+        // possibilidade de excluir o destino
+        if (dest.exists() && !replace)
             throw new IOException("Destination" + (dest.isDirectory() ? "directory " : "file ") + dest.getAbsolutePath() + " already exists");
 
+        // exclui o destino caso exista
+        if (dest.exists())
+            delete(dest);
+
         // cria o diretorio de destino
-        dest.mkdirs();
+        if (!dest.mkdirs())
+            throw new IOException("Cannot create directories from path " + dest.getAbsolutePath());
 
         // abre o arquivo jar
         ZipFile zipFile = new ZipFile(zip);
@@ -152,15 +156,17 @@ public class FileUtils {
             if (zipEntry.isDirectory() && !entry.exists())
 
                 // se for um diretorio cria e continua
-                entry.mkdirs();
+                if (entry.mkdirs())
+                    throw new IOException("Cannot create directories from path " + entry.getAbsolutePath());
 
             else {
 
                 // cria diretorios caso seja necessario
-                entry.getParentFile().mkdirs();
+                if (entry.getParentFile().mkdirs())
+                    throw new IOException("Cannot create directories from path " + entry.getParentFile().getAbsolutePath());
 
                 // neste caso eh um arquivo e continua a extracao
-                copyStream(zipFile.getInputStream(zipEntry), new FileOutputStream(entry));
+                StreamUtils.copy(zipFile.getInputStream(zipEntry), new FileOutputStream(entry));
             }
         }
 
@@ -205,7 +211,7 @@ public class FileUtils {
     }
 
     // realiza a leitura de um arquivo para um array de strings
-    public static List<String> readAll(File file) throws IOException {
+    public static List<String> read(File file) throws IOException {
 
         ArrayList<String> lines = new ArrayList<String>();
 

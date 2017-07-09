@@ -1,4 +1,4 @@
-package net.kernelits.antlibtasks.utils;
+package net.kernelits.antlibtasks;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,6 +1,6 @@
 package net.kernelits.antlibtasks.ant.tasks;
 
-import net.kernelits.antlibtasks.utils.pwd.Password;
+import net.kernelits.antlibtasks.pwd.Password;
 import org.apache.tools.ant.taskdefs.Get;
 
 public class GetTask extends Get {
